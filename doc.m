@@ -16,8 +16,8 @@
 %
 %% Description
 %
-% meshed_ovoid compute and display a meshed ovoid made of 65 samples
-% in longitude angle and 80 samples in latitude angle. The radius of
+% meshed_ovoid compute and display a meshed ovoid made of 64 samples
+% in longitude angle and 64 samples in latitude angle. The radius of
 % the bottom half sphere equals 1.
 %
 % meshed_ovoid(nb_samples) uses nb_samples for a half pi angle.

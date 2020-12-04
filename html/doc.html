@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>meshed_ovoid</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-07"><meta name="DC.source" content="doc.m"><style type="text/css">
+      --><title>meshed_ovoid</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-12-04"><meta name="DC.source" content="doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,11 +66,11 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>meshed_ovoid</h1><!--introduction--><p>Function to compute, display, and save a meshed ovoid.</p><p>Author &amp; support : nicolas.douillet (at) free.fr, 2020.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">See also</a></li><li><a href="#4">Input arguments</a></li><li><a href="#5">Output arguments</a></li><li><a href="#6">Example</a></li></ul></div><h2 id="1">Syntax</h2><p>meshed_ovoid;</p><p>meshed_ovoid(nb_samples);</p><p>meshed_ovoid(nb_samples, option_display);</p><p>[V,T] = meshed_ovoid(nb_samples, option_display);</p><h2 id="2">Description</h2><p>meshed_ovoid compute and display a meshed ovoid made of 65 samples in longitude angle and 80 samples in latitude angle. The radius of the bottom half sphere equals 1.</p><p>meshed_ovoid(nb_samples) uses nb_samples for a half pi angle.</p><p>meshed_ovoid(nb_samples, option_display) displays the result when option_display is set to logical *true/*1 and doesn't when it is set to logical false/0.</p><p>[V,T] = meshed_ovoid(nb_samples, option_display) stores the resulting vertices coordinates in the array V, and the corresponding triplet indices list in the array T.</p><h2 id="3">See also</h2><p><a href="https://fr.mathworks.com/help/matlab/ref/sphere.html">sphere</a> | <a href="https://fr.mathworks.com/help/matlab/ref/ellipsoid.html">ellipsoid</a> |</p><h2 id="4">Input arguments</h2><p>- nb_samples : positive integer double, nb_samples &gt; 2, the number of samples for 0.5*pi angle.</p><p>- option_display : either logical *true/false or numeric 1/0.</p><h2 id="5">Output arguments</h2><pre>      [ |  |  |]
+  </style></head><body><div class="content"><h1>meshed_ovoid</h1><!--introduction--><p>Function to compute, display, and save a meshed ovoid.</p><p>Author &amp; support : nicolas.douillet (at) free.fr, 2020.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">See also</a></li><li><a href="#4">Input arguments</a></li><li><a href="#5">Output arguments</a></li><li><a href="#6">Example</a></li></ul></div><h2 id="1">Syntax</h2><p>meshed_ovoid;</p><p>meshed_ovoid(nb_samples);</p><p>meshed_ovoid(nb_samples, option_display);</p><p>[V,T] = meshed_ovoid(nb_samples, option_display);</p><h2 id="2">Description</h2><p>meshed_ovoid compute and display a meshed ovoid made of 64 samples in longitude angle and 64 samples in latitude angle. The radius of the bottom half sphere equals 1.</p><p>meshed_ovoid(nb_samples) uses nb_samples for a half pi angle.</p><p>meshed_ovoid(nb_samples, option_display) displays the result when option_display is set to logical *true/*1 and doesn't when it is set to logical false/0.</p><p>[V,T] = meshed_ovoid(nb_samples, option_display) stores the resulting vertices coordinates in the array V, and the corresponding triplet indices list in the array T.</p><h2 id="3">See also</h2><p><a href="https://fr.mathworks.com/help/matlab/ref/sphere.html">sphere</a> | <a href="https://fr.mathworks.com/help/matlab/ref/ellipsoid.html">ellipsoid</a> |</p><h2 id="4">Input arguments</h2><p>- nb_samples : positive integer double, nb_samples &gt; 2, the number of samples for 0.5*pi angle.</p><p>- option_display : either logical *true/false or numeric 1/0.</p><h2 id="5">Output arguments</h2><pre>      [ |  |  |]
 - V = [Vx Vy Vz], real matrix double, the vertex coordinates. Size(V) = [nb_vertices,3].
       [ |  |  |]</pre><pre>      [ |  |  |]
 - T = [T1 T2 T3], positive integer matrix double, the triangulation. Size(T) = [nb_triangles,3].
-      [ |  |  |]</pre><h2 id="6">Example</h2><pre class="codeinput">meshed_ovoid;
+      [ |  |  |]</pre><h2 id="6">Example</h2><p>With default parameter values</p><pre class="codeinput">meshed_ovoid;
 </pre><img vspace="5" hspace="5" src="doc_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% meshed_ovoid
@@ -91,8 +91,8 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 %
 %% Description
 %
-% meshed_ovoid compute and display a meshed ovoid made of 65 samples
-% in longitude angle and 80 samples in latitude angle. The radius of
+% meshed_ovoid compute and display a meshed ovoid made of 64 samples
+% in longitude angle and 64 samples in latitude angle. The radius of
 % the bottom half sphere equals 1.
 %
 % meshed_ovoid(nb_samples) uses nb_samples for a half pi angle.
@@ -127,6 +127,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 %        [ |  |  |]
 %
 %% Example
+% With default parameter values
 
 meshed_ovoid;
 ##### SOURCE END #####
