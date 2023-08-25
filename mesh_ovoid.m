@@ -1,29 +1,29 @@
-function [V, T] = meshed_ovoid(nb_samples, option_display)
-%% meshed_ovoid : function to compute, display, and save a meshed ovoid.
+function [V, T] = mesh_ovoid(nb_samples, option_display)
+% mesh_ovoid : function to compute, display, and save a meshed ovoid.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2020.
+% Author & support : nicolas.douillet (at) free.fr, 2020-2023.
 %
 %
 % Syntax
 %
-% meshed_ovoid;
-% meshed_ovoid(nb_samples);
-% meshed_ovoid(nb_samples, option_display);
-% [V,T] = meshed_ovoid(nb_samples, option_display);
+% mesh_ovoid;
+% mesh_ovoid(nb_samples);
+% mesh_ovoid(nb_samples, option_display);
+% [V,T] = mesh_ovoid(nb_samples, option_display);
 %
 % Description
 %
-% meshed_ovoid compute and display a meshed ovoid made of 64 samples
+% mesh_ovoid compute and display a mesh ovoid made of 64 samples
 % in longitude angle and 64 samples in latitude angle. The radius of
 % the bottom half sphere equals 1.
 %
-% meshed_ovoid(nb_samples) uses nb_samples for a half pi angle.
+% mesh_ovoid(nb_samples) uses nb_samples for a half pi angle.
 %
-% meshed_ovoid(nb_samples, option_display) displays the result
+% mesh_ovoid(nb_samples, option_display) displays the result
 % when option_display is set to logical *true/*1 and doesn't when it is
 % set to logical false/0.
 %
-% [V,T] = meshed_ovoid(nb_samples, option_display) stores the resulting
+% [V,T] = mesh_ovoid(nb_samples, option_display) stores the resulting
 % vertices coordinates in the array V, and the corresponding triplet
 % indices list in the array T.
 %
@@ -51,10 +51,10 @@ function [V, T] = meshed_ovoid(nb_samples, option_display)
 %
 % Example with default parameter values
 %
-% meshed_ovoid;
+% mesh_ovoid;
 
 
-%% Input parsing
+% Input parsing
 assert(nargin < 3,'Too many input arguments.');
 
 if nargin < 2
@@ -63,7 +63,7 @@ if nargin < 2
     
     if nargin < 1
         
-        nb_samples = 32;
+        nb_samples = 16;
         
     else
         
@@ -78,7 +78,7 @@ else
 end
 
 
-%% Body
+% Body
 angle_step = pi/nb_samples;
 
 % Z axis rotation matrix
@@ -110,7 +110,7 @@ end
 
 S1 = numel(x);
 S2 = 2*nb_samples+1;
-T = build_triangulation(S1,S2);           
+T = build_triangulation(S1,S2,nb_samples);           
            
 % Remove duplicated vertices
 [V,~,n] = unique(V,'rows','stable');
@@ -124,32 +124,32 @@ if option_display
 end
 
 
-end % meshed_ovoid
+end % mesh_ovoid
 
 
-%% build_triangulation subfunction
-function [T] = build_triangulation(S1, S2)
+% build_triangulation subfunction
+function [T] = build_triangulation(S1, S2, nb_samples)
 
 
 r1 = cat(2,1,repelem(2:S1-1,2),S1);
 r1 = reshape(r1,[2,S1-1])';
 R1 = cat(2,r1,(1:S1-1)'+S1); % 1st triangle row indices
-% size(R1,1) = S1-1
+R1 = cat(1,R1,[2*nb_samples 2*nb_samples+1 1]); % add last triangle to connect
+R1(1+floor(0.5*size(R1,1)):end,:) = fliplr(R1(1+floor(0.5*size(R1,1)):end,:));
 
 r2 = cat(2,1+S1,repelem(2+S1:2*S1-1,2),2*S1);
 r2 = reshape(r2,[2,S1-1])';
 R2 = cat(2,(2:S1)',fliplr(r2)); % 2nd triangle row indices
+% R2(1+floor(0.5*size(R2,1)):end,:) = fliplr(R2(1+floor(0.5*size(R2,1)):end,:));
 
-T = repmat(cat(1,R1,R2),[S2-1,1]);
-% size(T) = 2*(S1-1)*(S2-1)
-
-T = T + S1*repelem((0:S2-2)',2*(S1-1),3);
+T = repmat(cat(1,R1,R2),[S2-2,1]);
+T = T + floor(0.5*S1)*repelem((0:S2-3)',2*(S1-1)+1,3);
 
 
 end % build_triangulation
 
 
-%% disp_ovoid subfunction
+% disp_ovoid subfunction
 function [] = disp_ovoid(V, T)
 
 
